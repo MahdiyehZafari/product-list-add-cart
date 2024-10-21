@@ -12,15 +12,15 @@ body
 }
 .text-333
 {
-    color: #333;
+    color: #ffffff;
 }
 .text-orange
 {
-    color: orangered;
+    color: rgb(255, 8, 0);
 }
 .bg-pink
 {
-    background-color: rgb(247, 101, 3);
+    background-color: rgb(247, 3, 3);
 }
 .rounded-me
 {
