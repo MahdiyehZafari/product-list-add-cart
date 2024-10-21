@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'MyFont';
+    src: url('../fonts/RedHatText-Italic-VariableFont_wght.ttf') format('truetype'),
+         url('../fonts/RedHatText-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body
+{
+    font-family: 'MyFont', sans-serif; 
+}
+.text-333
+{
+    color: #333;
+}
+.text-orange
+{
+    color: orangered;
+}
+.bg-pink
+{
+    background-color: rgb(247, 101, 3);
+}
+.rounded-me
+{
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
