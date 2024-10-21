@@ -17,7 +17,7 @@ function displayData(data) {
 
     data.forEach(item => {
         const col = document.createElement('div');
-        col.className = 'col-12 col-sm-5 col-md-4 col-lg-3 bg-pink rounded-2 p-1  justify-content-center';
+        col.className = 'col-12 col-sm-5 col-md-4 col-lg-3 bg-red shadow-lg rounded-2 p-1  justify-content-center';
         col.innerHTML = `<div class="row position-relative">
         <div class="position-absolute add top-92 w-75 start-12 bg-white d-flex gap-2 justify-content-center border border-danger rounded-pill  mx-auto z-3 p-1">
                 <img src="./assets/images/icon-add-to-cart.svg"  alt="">

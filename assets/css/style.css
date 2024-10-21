@@ -22,11 +22,15 @@ body
 .start-12 {
     left: 12% !important;
   }
-.text-orange
+.text-red
 {
     color: rgb(255, 8, 0);
 }
-.bg-pink
+.border-red
+{
+    border-color: rgb(255, 8, 0) !important;
+}
+.bg-red
 {
     background-color: rgb(247, 3, 3);
 }
