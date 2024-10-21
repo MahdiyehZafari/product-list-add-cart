@@ -14,6 +14,13 @@ body
 {
     color: #ffffff;
 }
+.top-92
+{
+    top: 92% !important;
+}
+.start-12 {
+    left: 12% !important;
+  }
 .text-orange
 {
     color: rgb(255, 8, 0);
