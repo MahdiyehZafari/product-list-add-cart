@@ -8,7 +8,8 @@
 
 body
 {
-    font-family: 'MyFont', sans-serif; 
+    font-family: 'MyFont', sans-serif;
+    /* background-color:#023047;  */
 }
 .text-333
 {
@@ -24,15 +25,19 @@ body
   }
 .text-red
 {
-    color: rgb(255, 8, 0);
+    color: #533c00;
+}
+.border-bt
+{
+    border-color: #cc9302 !important;
 }
 .border-red
 {
-    border-color: rgb(255, 8, 0) !important;
+    border-color: #ffb703 !important;
 }
 .bg-red
 {
-    background-color: rgb(247, 3, 3);
+    background-color: #ffbe0b
 }
 .rounded-me
 {
@@ -41,4 +46,8 @@ body
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
+}
+#quantity-controls
+{
+    display: none;
 }

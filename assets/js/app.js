@@ -1,3 +1,4 @@
+let quantity = 1;
 async function fetchData() {
     try {
         const response = await fetch('data.json'); // آدرس فایل JSON خود را وارد کنید
@@ -19,7 +20,7 @@ function displayData(data) {
         const col = document.createElement('div');
         col.className = 'col-12 col-sm-5 col-md-4 col-lg-3 bg-red shadow-lg rounded-2 p-1  justify-content-center';
         col.innerHTML = `<div class="row position-relative">
-        <div class="position-absolute add top-92 w-75 start-12 bg-white d-flex gap-2 justify-content-center border border-danger rounded-pill  mx-auto z-3 p-1">
+        <div class="position-absolute add top-92 w-75 start-12 bg-white d-flex gap-2 justify-content-center border border-bt rounded-pill  mx-auto z-3 p-1">
                 <img src="./assets/images/icon-add-to-cart.svg"  alt="">
                 <span>Add To Cart</span>
         </div>
@@ -34,6 +35,31 @@ function displayData(data) {
             <div class="row mt-1 fw-bold text-333">$ ${item.price}</div>
         </div>`;
         container.appendChild(col);
+
+        if (localStorage.getItem('cart')) {
+            const cart = JSON.parse(localStorage.getItem('cart'));
+            // quantity = cart.quantity;
+            // document.getElementById('quantity').innerText = quantity;
+        }
+        
+        // تابع برای به‌روزرسانی localStorage
+        function updateLocalStorage() {
+            const cart = {
+                // quantity:` ${item.name}`,
+                productName: `${item.name}`,
+                price: `${item.price}`
+            };
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        
+        document.getElementById('add-to-cart').addEventListener('click', function() 
+        {
+            updateLocalStorage()
+        })
     });
 }
 fetchData();
+
+
+// ////////
+
