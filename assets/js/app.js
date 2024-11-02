@@ -1,4 +1,7 @@
 let quantity = 1;
+
+let totalPrice = 0;
+
 async function fetchData() {
     try {
         const response = await fetch('data.json'); // آدرس فایل JSON خود را وارد کنید
@@ -43,6 +46,10 @@ function displayData(data) {
         });
     });
 
+    
+    let cartUser=document.querySelector('.cart-user');
+    cartUser.innerHTML='';
+
     function updateLocalStorage(item) {
         // خواندن سبد خرید از localStorage
         let cart = JSON.parse(localStorage.getItem('cart'));
@@ -69,12 +76,29 @@ function displayData(data) {
     
         // ذخیره سبد خرید به localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
+       
     }
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (cart.length === 0) {
+        cartUser.innerHTML = '<p>Your cart is empty.</p>';
+        // totalPriceContainer.innerHTML = '';
+        return;
+    }
+
+    cart.forEach(item => {
+        const itemDiv = document.createElement('span');
+        itemDiv.className = 'row';
+        itemDiv.innerHTML = `
+            <div>${item.productName} - $${item.price} x ${item.quantity}</div>
+        `;
+        cartUser.appendChild(itemDiv);
+        totalPrice += item.price * item.quantity; // محاسبه مجموع قیمت
+    });
     
 }
 
 fetchData();
 
-
-// ////////
 
