@@ -105,10 +105,15 @@ function displayData(data) {
 
     cart.forEach(item => {
         const itemDiv = document.createElement('span');
-        itemDiv.className = 'row';
-        itemDiv.innerHTML = `
-            <div>${item.productName} - $${item.price} x ${item.quantity}</div>
+        itemDiv.className = 'row item-cart';
+        itemDiv.innerHTML = `<div class='d-flex justify-content-between align-items-center'>
+        <span class='text-danger'>${item.productName}</span>
+        <span class='p-1  rounded-5 border border-1 border-secondary-subtle'><img src="./assets/images/icon-remove-item.svg" alt=""></span>
+        </div>
+      
+             
         `;
+        // - $${item.price} x ${item.quantity}
          console.log(totalPr)
         cartUser.appendChild(itemDiv);
         totalPrice += item.price * item.quantity; // محاسبه مجموع قیمت

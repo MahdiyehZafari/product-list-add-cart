@@ -60,3 +60,13 @@ body
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
+.item-cart
+{
+    background-color: transparent;
+    padding: 0.5rem;
+    border-bottom: 1px solid #cc9302;
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    width: 98%;
+}
