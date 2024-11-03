@@ -1,6 +1,7 @@
 let quantity = 1;
 
 let totalPrice = 0;
+let totalPr= 0;
 
 async function fetchData() {
     try {
@@ -23,7 +24,7 @@ function displayData(data) {
         const col = document.createElement('div');
         col.className = 'col-12 col-sm-5 col-md-4 col-lg-3 bg-red shadow-lg rounded-2 p-1  justify-content-center';
         col.innerHTML = `<div class="row position-relative">
-        <button id="add-to-cart" class="position-absolute add top-92 w-75 start-12 bg-white d-flex gap-2 justify-content-center border border-bt rounded-pill  mx-auto z-3 p-1">
+        <button id="add-to-cart" class="position-absolute add top-92 w-75 start-12 bg-white d-flex gap-2 justify-content-around border border-bt rounded-pill  mx-auto z-3 p-1">
             <img src="./assets/images/icon-add-to-cart.svg"  alt="">
             <span>Add To Cart</span>
         </button>
@@ -47,9 +48,9 @@ function displayData(data) {
             <button class='controls-bt'>
                 <img src="./assets/images/icon-decrement-quantity.svg" alt="">
             </button>
-                 <button class='controls-bt'>
-                    <img src="./assets/images/icon-increment-quantity.svg" alt="">
-                </button>`;
+            <button class='controls-bt'>
+                <img src="./assets/images/icon-increment-quantity.svg" alt="">
+            </button>`;
             
 
         });
@@ -75,6 +76,7 @@ function displayData(data) {
         if (existingProductIndex > -1) {
             // اگر محصول در سبد خرید موجود است، تعداد آن را افزایش دهید
             cart[existingProductIndex].quantity += 1;
+            totalPr += 1;
         } else {
             // اگر محصول جدید است، آن را به سبد خرید اضافه کنید
             cart.push({
@@ -107,9 +109,12 @@ function displayData(data) {
         itemDiv.innerHTML = `
             <div>${item.productName} - $${item.price} x ${item.quantity}</div>
         `;
-         document.querySelector('.count').innerHTML ='Your Cart'+ ' ' +`(${item.quantity})`
+         console.log(totalPr)
         cartUser.appendChild(itemDiv);
         totalPrice += item.price * item.quantity; // محاسبه مجموع قیمت
+        totalPr += item.quantity; // محاسبه مجموع کالاها
+        document.querySelector('.count').innerHTML ='Your Cart'+ ' ' + totalPr
+
     });
     
 }
