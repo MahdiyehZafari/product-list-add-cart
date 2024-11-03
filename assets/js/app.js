@@ -113,7 +113,7 @@ function displayData(data) {
         cartUser.appendChild(itemDiv);
         totalPrice += item.price * item.quantity; // محاسبه مجموع قیمت
         totalPr += item.quantity; // محاسبه مجموع کالاها
-        document.querySelector('.count').innerHTML ='Your Cart'+ ' ' + totalPr
+        document.querySelector('.count').innerHTML ='Your Cart'+ ' ' +'(' + totalPr + ')'
 
     });
     
