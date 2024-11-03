@@ -47,7 +47,19 @@ body
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
 }
-#quantity-controls
+.controls-bt
 {
-    display: none;
+    border:none ;
+    outline:none ;
+    background-color:#ffb804;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
