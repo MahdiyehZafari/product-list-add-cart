@@ -94,8 +94,8 @@ function displayData(data) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     if (cart.length === 0) {
-        cartUser.innerHTML = `<p class='fs-5 text-danger fw-bold'>Your cart is empty.</p>
-        <p class='text-danger fw-bold'>added items will appear here.</p>`;
+        cartUser.innerHTML = `<p class='fs-5 fw-bold'>Your cart is empty.</p>
+        <p class='fw-bold'>added items will appear here.</p>`;
         cartUser.style.background='url(./assets/images/illustration-empty-cart.svg)';
         cartUser.style.backgroundRepeat='no-repeat';
         cartUser.style.backgroundPosition='center';
