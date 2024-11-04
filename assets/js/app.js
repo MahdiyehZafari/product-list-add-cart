@@ -25,7 +25,7 @@ function displayData(data) {
         col.className = 'col-8 col-sm-5 col-md-4 col-lg-3 bg-red shadow-lg rounded-2 p-1  justify-content-center';
         col.innerHTML = `<div class="row position-relative">
         <button id="add-to-cart" class="position-absolute add top-92 w-75 start-12 bg-white d-flex gap-2 justify-content-around border border-bt rounded-pill  mx-auto z-3 p-1">
-            <img src="./assets/images/icon-add-to-cart.svg"  alt="">
+            <img src="./assets/images/icon-add-to-cart.svg" data-product-id="${item.id}" alt="">
             <span>Add To Cart</span>
         </button>
         <img class="rounded-me w-100" src="${item.image.thumbnail}" 
@@ -41,9 +41,11 @@ function displayData(data) {
         container.appendChild(col);
 
     });
+
     document.querySelectorAll('#add-to-cart').forEach((button, index) => {
         button.addEventListener('click', function() {
             updateLocalStorage(data[index]); // ارسال محصول مربوطه
+            updateCartUI();
             button.innerHTML=`
             <button class='controls-bt'>
                 <img src="./assets/images/icon-decrement-quantity.svg" alt="">
@@ -51,13 +53,11 @@ function displayData(data) {
             <button class='controls-bt'>
                 <img src="./assets/images/icon-increment-quantity.svg" alt="">
             </button>`;
-            
-
         });
         
     });
-
-    
+    updateCartUI();
+ }
     let cartUser=document.querySelector('.cart-user');
     cartUser.innerHTML='';
 
@@ -82,7 +82,8 @@ function displayData(data) {
             cart.push({
                 productName: item.name,
                 price: item.price,
-                quantity: 1
+                quantity: 1,
+                id:item.id
             });
         }
     
@@ -102,13 +103,31 @@ function displayData(data) {
         document.querySelector('.order-cart').style.display='none'
         document.querySelector('.order-cart-text').style.display='none'
         // totalPriceContainer.innerHTML = '';
-        return;
+        // return;
     }
+
     function formatCurrency(value) {
         return `$${value.toFixed(2)}`; // فرمت‌دهی به دو رقم اعشار
     }
 
+    function updateCartUI() {
+        const cartUser = document.querySelector('.cart-user');
+        cartUser.innerHTML = ''; // پاک کردن محتوای قبلی
     
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let totalPr = 0;
+        if (cart.length === 0) {
+            cartUser.innerHTML = `<p class='fs-5 fw-bold'>Your cart is empty.</p>
+            <p class='fw-bold'>added items will appear here.</p>`;
+            return;
+        }
+        // حذف محصول از سبد خرید
+        function removeItem(productName) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.productName !== productName); 
+            localStorage.setItem('cart', JSON.stringify(cart)); 
+            updateCartUI();
+        }    
 
 
     let totalItemPrice = 0;
@@ -118,7 +137,9 @@ function displayData(data) {
         itemDiv.className = 'row item-cart';
         itemDiv.innerHTML = `<div class='d-flex justify-content-between align-items-center'>
         <span class=''>${item.productName}</span>
-        <span class='p-1 rounded-5 border border-2 border-secondary-subtle d-flex justify-content-center align-items-center'><img src="./assets/images/icon-remove-item.svg" alt=""></span>
+        <button class='remove p-1 rounded-5 border border-2 border-secondary-subtle d-flex justify-content-center align-items-center'>
+            <img src="./assets/images/icon-remove-item.svg" alt="">
+        </<button>
         </div>
         <div class=''>
             <span class='text-danger w-100 fw-bold'>x${item.quantity}</span>
@@ -126,14 +147,21 @@ function displayData(data) {
             <span  class='ms-2 text-red'>${formatCurrency(totalItemPrice)}</span>
         </div>
         `;
+        const removeButton = itemDiv.querySelector('.remove');
+        removeButton.addEventListener('click', () => removeItem(item.productName));
+        cartUser.appendChild(itemDiv);
+        // totalPr += item.quantity;
+
         let totalCartValue = cart.reduce((total, item) => {
             return total += (item.price * item.quantity);
         }, 0);
         document.querySelector('.order-cart-text').innerHTML='Order Total'
+        document.querySelector('.order-total-text').innerHTML='Order Count'
         document.querySelector('.order-cart-val').innerHTML=`${formatCurrency(totalCartValue)}`
-        console.log(totalPr)
         cartUser.appendChild(itemDiv);
         totalPr += item.quantity; // محاسبه مجموع کالاها
+        document.querySelector('.order-total-val').innerHTML=totalPr;
+
         document.querySelector('.count').innerHTML ='Your Cart'+ ' ' +'(' + totalPr + ')'
 
     });
