@@ -99,24 +99,40 @@ function displayData(data) {
         cartUser.style.background='url(./assets/images/illustration-empty-cart.svg)';
         cartUser.style.backgroundRepeat='no-repeat';
         cartUser.style.backgroundPosition='center';
+        document.querySelector('.order-cart').style.display='none'
+        document.querySelector('.order-cart-text').style.display='none'
         // totalPriceContainer.innerHTML = '';
         return;
     }
+    function formatCurrency(value) {
+        return `$${value.toFixed(2)}`; // فرمت‌دهی به دو رقم اعشار
+    }
 
+    
+
+
+    let totalItemPrice = 0;
     cart.forEach(item => {
+        totalItemPrice = item.price * item.quantity;
         const itemDiv = document.createElement('span');
         itemDiv.className = 'row item-cart';
         itemDiv.innerHTML = `<div class='d-flex justify-content-between align-items-center'>
-        <span class='text-danger'>${item.productName}</span>
-        <span class='p-1  rounded-5 border border-1 border-secondary-subtle'><img src="./assets/images/icon-remove-item.svg" alt=""></span>
+        <span class=''>${item.productName}</span>
+        <span class='p-1 rounded-5 border border-2 border-secondary-subtle d-flex justify-content-center align-items-center'><img src="./assets/images/icon-remove-item.svg" alt=""></span>
         </div>
-      
-             
+        <div class=''>
+            <span class='text-danger w-100 fw-bold'>x${item.quantity}</span>
+            <span  class='ms-2 text-secondary'>@ $${item.price}</span>
+            <span  class='ms-2 text-red'>${formatCurrency(totalItemPrice)}</span>
+        </div>
         `;
-        // - $${item.price} x ${item.quantity}
-         console.log(totalPr)
+        let totalCartValue = cart.reduce((total, item) => {
+            return total += (item.price * item.quantity);
+        }, 0);
+        document.querySelector('.order-cart-text').innerHTML='Order Total'
+        document.querySelector('.order-cart-val').innerHTML=`${formatCurrency(totalCartValue)}`
+        console.log(totalPr)
         cartUser.appendChild(itemDiv);
-        totalPrice += item.price * item.quantity; // محاسبه مجموع قیمت
         totalPr += item.quantity; // محاسبه مجموع کالاها
         document.querySelector('.count').innerHTML ='Your Cart'+ ' ' +'(' + totalPr + ')'
 
